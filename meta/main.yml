@@ -1,10 +1,11 @@
 ---
 galaxy_info:
   author: fi-do
+  role_name: grav
   description: Simple role to install grav cms
   company: free
 
-  license: GPLv2)
+  license: GPLv2
 
   min_ansible_version: 2.7
 
@@ -24,9 +25,14 @@ galaxy_info:
   #   - 7
   #   - 99.99
   platforms:
-    - name: Random
+    - name: Ubuntu
+      version:
+        - Bionic
 
-  galaxy_tags: []
+  galaxy_tags:
+    - grav
+    - cms
+    - web
   # List tags for your role here, one per line. A tag is a keyword that describes
   # and categorizes the role. Users find roles by searching for tags. Be sure to
   # remove the '[]' above, if you add tags to this list.
