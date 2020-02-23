@@ -1,0 +1,5 @@
+---
+# defaults file for grav
+
+grav_version: "1.6.21"
+grav_document_root: "/var/www/html/grav"

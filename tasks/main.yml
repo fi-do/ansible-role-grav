@@ -1,0 +1,23 @@
+---
+
+- name: Check if grav cms already in document root
+  stat:
+    path: "{{ grav_document_root }}"
+  register: grav
+
+- name: Install grav cmd
+  block:
+    - name: Download grav cms
+      unarchive:
+        src: https://github.com/getgrav/grav/releases/download/{{ grav_version }}/grav-admin-v{{ grav_version }}.zip
+        dest: /tmp
+        owner: www-data
+        group: www-data
+        remote_src: yes
+
+    - name: Copy grav cms to document root
+      synchronize:
+        src: /tmp/grav-admin/
+        dest: "{{ grav_document_root }}"
+      delegate_to: "{{ inventory_hostname }}"
+  when: grav.stat.exists == False

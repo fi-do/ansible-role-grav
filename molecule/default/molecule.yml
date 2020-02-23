@@ -1,0 +1,44 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: lxd
+lint:
+  name: yamllint
+platforms:
+  - name: instance
+    url: unix:/var/snap/lxd/common/lxd/unix.socket
+    source:
+      type: image
+      mode: pull
+      server: https://images.linuxcontainers.org
+      protocol: simplestreams # if you get a 404, try setting protocol: simplestreams
+      alias: ubuntu/bionic/amd64
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  inventory:
+    host_vars:
+      instance:
+          ansible_python_interpreter: /usr/bin/python3
+          packages:
+            - libapache2-mod-php7.2
+            - rsync
+          apache_vhosts:
+            - {servername: "test.de", documentroot: "/var/www/html/grav-admin"}
+          php_packages:
+            - php-zip
+            - php-mbstring
+            - php-curl
+            - php-dom
+            - php-xml
+            - php-gd
+          php_default_version_debian: "7.2"
+          php_webserver_daemon: "apache2"
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

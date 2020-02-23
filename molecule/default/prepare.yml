@@ -1,0 +1,11 @@
+---
+
+- name: Prepare
+  hosts: all
+  gather_facts: no
+  become: yes
+
+  roles:
+    - role: simple-bootstrap
+    - role: geerlingguy.apache
+    - role: geerlingguy.php
