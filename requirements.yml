@@ -1,4 +1,5 @@
 ---
 
+  - fi_do.simple_bootstrap
   - geerlingguy.apache
   - geerlingguy.php

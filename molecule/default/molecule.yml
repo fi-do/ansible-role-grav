@@ -24,11 +24,14 @@ provisioner:
     host_vars:
       instance:
           ansible_python_interpreter: /usr/bin/python3
-          packages:
+          grav_version: "1.6.21"
+          grav_document_root: "/var/www/html/grav"
+          simple_bootstrap_packages:
             - libapache2-mod-php7.2
             - rsync
+            - nano
           apache_vhosts:
-            - {servername: "test.de", documentroot: "/var/www/html/grav-admin"}
+            - {servername: "{{  ansible_default_ipv4.address }}", documentroot: "{{ grav_document_root }}" }
           php_packages:
             - php-zip
             - php-mbstring
